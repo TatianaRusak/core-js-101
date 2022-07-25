@@ -27,8 +27,13 @@
  *  21 => 'Fizz'
  *
  */
-function getFizzBuzz(/* num */) {
-  throw new Error('Not implemented');
+function getFizzBuzz(num) {
+  switch (true) {
+    case !(num % 15): return 'FizzBuzz';
+    case !(num % 3): return 'Fizz';
+    case !(num % 5): return 'Buzz';
+    default: return num;
+  }
 }
 
 
@@ -43,8 +48,8 @@ function getFizzBuzz(/* num */) {
  *   5  => 120
  *   10 => 3628800
  */
-function getFactorial(/* n */) {
-  throw new Error('Not implemented');
+function getFactorial(n) {
+  return (n !== 1) ? n * getFactorial(n - 1) : 1;
 }
 
 
@@ -60,8 +65,16 @@ function getFactorial(/* n */) {
  *   5,10  =>  45 ( = 5+6+7+8+9+10 )
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
-function getSumBetweenNumbers(/* n1, n2 */) {
-  throw new Error('Not implemented');
+function getSumBetweenNumbers(n1, n2) {
+  const arr = Array(n2 - n1 + 1).fill(n1);
+  let increase = 0;
+  return arr
+    .map((item) => {
+      const newItem = item + increase;
+      increase += 1;
+      return newItem;
+    })
+    .reduce((sum, item) => sum + item, 0);
 }
 
 
@@ -80,8 +93,10 @@ function getSumBetweenNumbers(/* n1, n2 */) {
  *   10,1,1   =>  false
  *   10,10,10 =>  true
  */
-function isTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isTriangle(...args) {
+  const arr = [...args].sort();
+  const sum = arr[0] + arr[1];
+  return sum > arr[2];
 }
 
 
@@ -148,8 +163,15 @@ function doRectanglesOverlap(/* rect1, rect2 */) {
  *   { center: { x:0, y:0 }, radius:10 },  { x:10, y:10 }   => false
  *
  */
-function isInsideCircle(/* circle, point */) {
-  throw new Error('Not implemented');
+function isInsideCircle(circle, point) {
+  const distPoints1 = (point.x - circle.center.x) * (point.x - circle.center.x);
+  const distPoints2 = (point.y - circle.center.y) * (point.y - circle.center.y);
+  const distPoints = distPoints1 + distPoints2;
+  const radiusPow = circle.radius * circle.radius;
+  if (distPoints < radiusPow) {
+    return true;
+  }
+  return false;
 }
 
 
@@ -164,9 +186,11 @@ function isInsideCircle(/* circle, point */) {
  *   'abracadabra'  => 'c'
  *   'entente' => null
  */
-function findFirstSingleChar(/* str */) {
-  throw new Error('Not implemented');
-}
+// function findFirstSingleChar(str) {
+//   const arr = str.split('');
+//   const uniqueArray = [...new Set(arr)];
+//   return uniqueArray[0];
+// }
 
 
 /**
@@ -191,9 +215,13 @@ function findFirstSingleChar(/* str */) {
  *   5, 3, true, true   => '[3, 5]'
  *
  */
-function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
-  throw new Error('Not implemented');
-}
+// function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
+//   let startBracket;
+//   let endBracket;
+//   (isStartIncluded) ? startBracket = '[' : startBracket = '(';
+//   isEndIncluded ? endBracket = ']' : endBracket = ')';
+
+// }
 
 
 /**
@@ -208,8 +236,11 @@ function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
  * 'rotator' => 'rotator'
  * 'noon' => 'noon'
  */
-function reverseString(/* str */) {
-  throw new Error('Not implemented');
+function reverseString(str) {
+  return str
+    .split('')
+    .reverse()
+    .join('');
 }
 
 
@@ -225,8 +256,11 @@ function reverseString(/* str */) {
  *   87354 => 45378
  *   34143 => 34143
  */
-function reverseInteger(/* num */) {
-  throw new Error('Not implemented');
+function reverseInteger(num) {
+  return String(num)
+    .split('')
+    .reverse()
+    .join('');
 }
 
 
@@ -268,8 +302,22 @@ function isCreditCardNumber(/* ccn */) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+function getDigitalRoot(num) {
+  const arr = String(num)
+    .split('')
+    .map((elem) => +elem);
+  function sumFunc(array) {
+    let sumAr = array.reduce((sum, item) => sum + item, 0);
+    if (sumAr > 9) {
+      sumAr = sumFunc(String(sumAr)
+        .split('')
+        .map((elem) => +elem));
+    }
+    return sumAr;
+  }
+
+  const sumOfArr = sumFunc(arr);
+  return sumOfArr;
 }
 
 
@@ -406,8 +454,8 @@ module.exports = {
   isTriangle,
   doRectanglesOverlap,
   isInsideCircle,
-  findFirstSingleChar,
-  getIntervalString,
+  // findFirstSingleChar,
+  // getIntervalString,
   reverseString,
   reverseInteger,
   isCreditCardNumber,
