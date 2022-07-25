@@ -115,40 +115,44 @@ function fromJSON(proto, json) {
  *  For more examples see unit tests.
  */
 
-// const cssSelectorBuilder = {
-//   element(/* value */) {
-//     return `${value}`;
-//   },
+const cssSelectorBuilder = {
+  element(value) {
+    return `${value}`;
+  },
 
-//   id(value) {
-//     return `#${value}`;
-//   },
+  id(value) {
+    return `#${value}`;
+  },
 
-//   class(value) {
-//     return `.${value}`;
-//   },
+  class(value) {
+    return `.${value}`;
+  },
 
-//   attr(value) {
-//     return `[${value}]`;
-//   },
+  attr(value) {
+    return `[${value}]`;
+  },
 
-//   pseudoClass(value) {
-//     return `:${value}`;
-//   },
+  pseudoClass(value) {
+    return `:${value}`;
+  },
 
-//   pseudoElement(value) {
-//     return `::${value}`;
-//   },
+  pseudoElement(value) {
+    return `::${value}`;
+  },
 
-//   combine(selector1, combinator, selector2) {
-//     throw new Error('Not implemented');
-//   },
-// };
+  stringify() {
+    return JSON.stringify(this);
+  },
+
+  combine(selector1, combinator, selector2) {
+    return `${selector1} ${combinator} ${selector2}`;
+  },
+};
 
 
 module.exports = {
   Rectangle,
   getJSON,
   fromJSON,
-  // cssSelectorBuilder,
+  cssSelectorBuilder,
 };
