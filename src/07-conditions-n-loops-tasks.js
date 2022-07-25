@@ -186,11 +186,12 @@ function isInsideCircle(circle, point) {
  *   'abracadabra'  => 'c'
  *   'entente' => null
  */
-// function findFirstSingleChar(str) {
-//   const arr = str.split('');
-//   const uniqueArray = [...new Set(arr)];
-//   return uniqueArray[0];
-// }
+function findFirstSingleChar(str) {
+  const arr = str.split('');
+  retrun 
+  const uniqueArray = [...new Set(arr)];
+  return uniqueArray[0];
+}
 
 
 /**
@@ -215,13 +216,26 @@ function isInsideCircle(circle, point) {
  *   5, 3, true, true   => '[3, 5]'
  *
  */
-// function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
-//   let startBracket;
-//   let endBracket;
-//   (isStartIncluded) ? startBracket = '[' : startBracket = '(';
-//   isEndIncluded ? endBracket = ']' : endBracket = ')';
+function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
+  let startBracket = '';
+  let endBracket = '';
 
-// }
+  switch (true) {
+    case isStartIncluded: startBracket = '[';
+      break;
+    default: startBracket = '(';
+  }
+
+  switch (true) {
+    case isEndIncluded: endBracket = ']';
+      break;
+    default: endBracket = ')';
+  }
+
+  const arrOfNum = [a, b].sort();
+
+  return `${startBracket}${arrOfNum[0]}, ${arrOfNum[1]}${endBracket}`;
+}
 
 
 /**
@@ -454,8 +468,8 @@ module.exports = {
   isTriangle,
   doRectanglesOverlap,
   isInsideCircle,
-  // findFirstSingleChar,
-  // getIntervalString,
+  findFirstSingleChar,
+  getIntervalString,
   reverseString,
   reverseInteger,
   isCreditCardNumber,
